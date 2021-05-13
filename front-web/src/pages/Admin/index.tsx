@@ -1,6 +1,8 @@
+import Navbar from "./Navbar";
+
 const Admin = () => (
     <div>
-        <h1>Admin</h1>
+        <Navbar />
     </div>
 );
 
