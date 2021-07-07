@@ -44,14 +44,3 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Instalation
-
-##Criando projeto com o create-react-app:
-npx create-react-app front-web --template typescript
-
-##Adicionando o bootstrap:
-yarn add bootstrap@4.6.0
-
-##Adicionando o node-sass:
-yarn add node-sass@4.14.1
