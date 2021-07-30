@@ -24,7 +24,7 @@ import com.devsuperior.dscatalog.entities.Product;
 import com.devsuperior.dscatalog.repositories.CategoryRepository;
 import com.devsuperior.dscatalog.repositories.ProductRepository;
 import com.devsuperior.dscatalog.services.exceptions.DatabaseException;
-import com.devsuperior.dscatalog.services.exceptions.ResourceNotFindException;
+import com.devsuperior.dscatalog.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class ProductService {
@@ -48,7 +48,7 @@ public class ProductService {
 	@Transactional(readOnly = true)
 	public ProductDTO findById(Long id) {
 		Optional<Product> obj = repository.findById(id);
-		Product entity = obj.orElseThrow(() -> new EntityNotFoundException("Entity not found"));
+		Product entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
 		return new ProductDTO(entity, entity.getCategories());
 	}
 
@@ -69,7 +69,7 @@ public class ProductService {
 			entity = repository.save(entity);
 			return new ProductDTO(entity);
 		}catch(EntityNotFoundException e) {
-			throw new ResourceNotFindException("Id not find" + id);
+			throw new ResourceNotFoundException("Id not find" + id);
 		}
 	}
 
@@ -78,7 +78,7 @@ public class ProductService {
 		try {
 			repository.deleteById(id);
 		}catch(EmptyResultDataAccessException e) {
-			throw new ResourceNotFindException("Id not found " + id);
+			throw new ResourceNotFoundException("Id not found " + id);
 		}catch(DataIntegrityViolationException e) {
 			throw new DatabaseException("Integrity violation");
 		}
