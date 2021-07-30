@@ -27,7 +27,7 @@ import com.devsuperior.dscatalog.entities.User;
 import com.devsuperior.dscatalog.repositories.RoleRepository;
 import com.devsuperior.dscatalog.repositories.UserRepository;
 import com.devsuperior.dscatalog.services.exceptions.DatabaseException;
-import com.devsuperior.dscatalog.services.exceptions.ResourceNotFindException;
+import com.devsuperior.dscatalog.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -73,7 +73,7 @@ public class UserService implements UserDetailsService {
 			entity = repository.save(entity);
 			return new UserDTO(entity);
 		}catch(EntityNotFoundException e) {
-			throw new ResourceNotFindException("Id not find" + id);
+			throw new ResourceNotFoundException("Id not find" + id);
 		}
 	}
 
@@ -82,7 +82,7 @@ public class UserService implements UserDetailsService {
 		try {
 			repository.deleteById(id);
 		}catch(EmptyResultDataAccessException e) {
-			throw new ResourceNotFindException("Id not found " + id);
+			throw new ResourceNotFoundException("Id not found " + id);
 		}catch(DataIntegrityViolationException e) {
 			throw new DatabaseException("Integrity violation");
 		}
