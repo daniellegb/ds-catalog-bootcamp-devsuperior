@@ -86,7 +86,7 @@ public class ProductServiceTests {
 	}
 	
 	@Test
-	public void deleteShouldThrowDatabaseExceptionWhenId() {
+	public void deleteShouldThrowDatabaseExceptionWhenDependentId() {
 		Assertions.assertThrows(DatabaseException.class, () -> {
 			service.delete(dependentId);
 		});
@@ -129,5 +129,7 @@ public class ProductServiceTests {
 			service.update(nonExistingId, dto);
 		});
 	}
+	
+	
 	
 }
